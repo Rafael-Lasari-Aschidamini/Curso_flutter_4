@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_loja/components/grid_produto.dart';
+import 'package:projeto_loja/models/cart.dart';
 import 'package:projeto_loja/models/produtos_lista.dart';
+import 'package:projeto_loja/utils/rotas_aplicacao.dart';
 import 'package:provider/provider.dart';
+import '../components/badge.dart';
 
 enum FiltrarOpcao {
   Favorite,
@@ -36,22 +39,35 @@ class _PageProductsOverviewState extends State<PageProductsOverview> {
               ),
             ],
             onSelected: (FiltrarOpcao valorSelecionado) {
-              setState(() {
-                if (valorSelecionado == FiltrarOpcao.Favorite) {
-                  _mostrarFavoritos = true;
-                  //   provider.mostrarFavoritos();
-                } else {
-                  _mostrarFavoritos = false;
-                  //   provider.mostrarTodos();
-                }
-              });
+              setState(
+                () {
+                  if (valorSelecionado == FiltrarOpcao.Favorite) {
+                    _mostrarFavoritos = true;
+                    //   provider.mostrarFavoritos();
+                  } else {
+                    _mostrarFavoritos = false;
+                    //   provider.mostrarTodos();
+                  }
+                },
+              );
             },
-          )
+          ),
+          Consumer<Cart>(
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(RotasAplicacao.DETALHE_CARRINHO);
+              },
+              icon: Icon(Icons.shopping_cart),
+            ),
+            builder: (ctx, cart, child) => BadgeVeplex(
+              value: cart.itemsCount.toString(),
+              child: child!,
+            ),
+          ),
         ],
       ),
-      body: GridProduto(
-        mostrarFavoritos: _mostrarFavoritos,
-      ),
+      body: GridProduto(_mostrarFavoritos),
     );
   }
 }

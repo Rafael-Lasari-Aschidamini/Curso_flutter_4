@@ -3,7 +3,7 @@ import 'package:projeto_loja/data/dummy_data.dart';
 import 'package:projeto_loja/models/produtos.dart';
 
 class ProdutosLista with ChangeNotifier {
-  List<Produtos> _items = dummyProdutos;
+  final List<Produtos> _items = dummyProdutos;
   List<Produtos> get items => [..._items];
   List<Produtos> get itemsFavoritos =>
       _items.where((prod) => prod.isFavorite).toList();
