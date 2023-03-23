@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_loja/models/produtos.dart';
 import 'package:projeto_loja/utils/rotas_aplicacao.dart';
+import 'package:provider/provider.dart';
+
+import '../models/produtos_lista.dart';
 
 class ProdutosItens extends StatelessWidget {
   const ProdutosItens(this.produtos, {super.key});
@@ -29,7 +32,10 @@ class ProdutosItens extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Provider.of<ProdutosLista>(context, listen: false)
+                    .removerProduto(produtos);
+              },
               icon: Icon(Icons.delete),
               color: Theme.of(context).colorScheme.error,
             )

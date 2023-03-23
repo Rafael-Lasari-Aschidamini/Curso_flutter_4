@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:projeto_loja/data/dummy_data.dart';
 import 'package:projeto_loja/models/produtos.dart';
@@ -39,6 +38,14 @@ class ProdutosLista with ChangeNotifier {
     int indexs = _items.indexWhere((p) => p.id == produtos.id);
     if (indexs >= 0) {
       _items[indexs] = produtos;
+      notifyListeners();
+    }
+  }
+
+  void removerProduto(Produtos produtos) {
+    int indexs = _items.indexWhere((p) => p.id == produtos.id);
+    if (indexs >= 0) {
+      _items.removeWhere((p) => p.id == produtos.id);
       notifyListeners();
     }
   }
