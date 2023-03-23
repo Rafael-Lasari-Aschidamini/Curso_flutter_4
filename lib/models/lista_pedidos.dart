@@ -1,8 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:projeto_loja/models/cart.dart';
 import 'package:projeto_loja/models/pedidos.dart';
 

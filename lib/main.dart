@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_loja/models/cart.dart';
+import 'package:projeto_loja/models/lista_pedidos.dart';
 import 'package:projeto_loja/models/produtos_lista.dart';
 import 'package:projeto_loja/pages/page_cart.dart';
-import 'package:projeto_loja/pages/page_contador.dart';
 import 'package:projeto_loja/pages/page_detalhes_produtos.dart';
+import 'package:projeto_loja/pages/page_formulario_produtos.dart';
+import 'package:projeto_loja/pages/page_pedidos.dart';
 import 'package:projeto_loja/pages/page_products_overview.dart';
-import 'package:projeto_loja/providers/conter.dart';
+import 'package:projeto_loja/pages/page_produtos.dart';
 import 'package:projeto_loja/utils/rotas_aplicacao.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +27,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => Cart(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ListaPedidos(),
+        ),
       ],
       child: MaterialApp(
         title: 'Projeto Loja',
@@ -34,10 +39,14 @@ class MyApp extends StatelessWidget {
               .copyWith(secondary: Colors.deepOrange)
               .copyWith(background: Colors.purple),
         ),
-        home: const PageProductsOverview(),
+        // home: const PageProductsOverview(),
         routes: {
-          RotasAplicacao.DETALHE_PRODUTO: (ctx) => const PageDetalhesProdutos(),
-          RotasAplicacao.DETALHE_CARRINHO: (ctx) => const PageCart()
+          RotasAplicacao.HOME: (ctx) => PageProductsOverview(),
+          RotasAplicacao.DETALHE_PRODUTO: (ctx) => PageDetalhesProdutos(),
+          RotasAplicacao.DETALHE_CARRINHO: (ctx) => PageCart(),
+          RotasAplicacao.PEDIDOS: (ctx) => PagePedidos(),
+          RotasAplicacao.PRODUTO: (ctx) => PageProduto(),
+          RotasAplicacao.FORMULARIO_PRODUTO: (ctx) => PageFormularioProdutos(),
         },
         debugShowCheckedModeBanner: false,
       ),

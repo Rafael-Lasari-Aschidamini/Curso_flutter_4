@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:projeto_loja/components/product_item.dart';
+import 'package:projeto_loja/components/product_grid_item.dart';
 import 'package:provider/provider.dart';
 
 import '../models/produtos.dart';
@@ -23,7 +23,7 @@ class GridProduto extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       itemCount: carregarProdutos.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
-        child: ProductItem(),
+        child: ProductGridItem(),
         value: carregarProdutos[i],
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

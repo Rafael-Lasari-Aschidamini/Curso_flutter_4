@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_loja/components/cart_itens.dart';
 import 'package:projeto_loja/models/cart.dart';
+import 'package:projeto_loja/models/lista_pedidos.dart';
+import 'package:projeto_loja/models/pedidos.dart';
 import 'package:provider/provider.dart';
 
 class PageCart extends StatelessWidget {
@@ -49,11 +51,19 @@ class PageCart extends StatelessWidget {
                   ),
                   Spacer(),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<ListaPedidos>(
+                        context,
+                        listen: false,
+                      ).adicionarPedido(cart);
+                      cart.clear();
+                    },
                     child: Text('COMPRAR'),
                     style: TextButton.styleFrom(
-                      textStyle:
-                          TextStyle(color: Theme.of(context).primaryColor),
+                      textStyle: TextStyle(
+                          color: Theme.of(
+                        context,
+                      ).primaryColor),
                     ),
                   ),
                 ],
