@@ -33,8 +33,38 @@ class ProdutosItens extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                Provider.of<ProdutosLista>(context, listen: false)
-                    .removerProduto(produtos);
+                showDialog<bool>(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text('Excluir Produto'),
+                    content: Text('Tem Certerza?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text('Não'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Provider.of<ProdutosLista>(
+                            context,
+                            listen: false,
+                          ).removerProduto(produtos);
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Sim'),
+                      ),
+                    ],
+                  ),
+                ).then(
+                  (value) {
+                    if (value ?? false) {
+                      Provider.of<ProdutosLista>(
+                        context,
+                        listen: false,
+                      ).removerProduto(produtos);
+                    }
+                  },
+                );
               },
               icon: Icon(Icons.delete),
               color: Theme.of(context).colorScheme.error,
