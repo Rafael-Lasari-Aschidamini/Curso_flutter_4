@@ -20,7 +20,7 @@ class _PageContadorState extends State<PageContador> {
         ModalRoute.of(context)!.settings.arguments as Produtos;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Exemplocontador'),
+        title: const Text('Exemplon contador'),
       ),
       body: Column(
         children: [
@@ -29,7 +29,6 @@ class _PageContadorState extends State<PageContador> {
             onPressed: () {
               setState(() {});
               ConterProvider.of(context)?.state.inc();
-              print(ConterProvider.of(context)?.state.value);
             },
             icon: Icon(Icons.add),
           ),
@@ -37,7 +36,6 @@ class _PageContadorState extends State<PageContador> {
             onPressed: () {
               setState(() {});
               ConterProvider.of(context)?.state.dec();
-              print(ConterProvider.of(context)?.state.value);
             },
             icon: const Icon(Icons.remove_outlined),
           )

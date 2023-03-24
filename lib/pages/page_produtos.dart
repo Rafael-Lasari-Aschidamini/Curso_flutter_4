@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -10,6 +12,13 @@ import 'package:provider/provider.dart';
 
 class PageProduto extends StatelessWidget {
   const PageProduto({super.key});
+
+  Future<void> _refreshProdutos(BuildContext context) {
+    return Provider.of<ProdutosLista>(
+      context,
+      listen: false,
+    ).carregarProdutos();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +38,18 @@ class PageProduto extends StatelessWidget {
         ],
       ),
       drawer: AppDrawer(),
-      body: Padding(
-        padding: EdgeInsets.all(8),
-        child: ListView.builder(
-          itemCount: produtos.itemsCount,
-          itemBuilder: (ctx, i) => Column(
-            children: [
-              ProdutosItens(produtos.items[i]),
-              Divider(),
-            ],
+      body: RefreshIndicator(
+        onRefresh: () => _refreshProdutos(context),
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: ListView.builder(
+            itemCount: produtos.itemsCount,
+            itemBuilder: (ctx, i) => Column(
+              children: [
+                ProdutosItens(produtos.items[i]),
+                Divider(),
+              ],
+            ),
           ),
         ),
       ),
